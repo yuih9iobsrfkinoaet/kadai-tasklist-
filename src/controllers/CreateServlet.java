@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Message;
+import models.Task;
 import utils.DBUtil;
 
 /**
@@ -34,16 +34,16 @@ public class CreateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
             em.getTransaction().begin();
 
-            Message m = new Message();
+            Task t = new Task();
 
             String content = request.getParameter("content");
-            m.setContent(content);
+            t.setContent(content);
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            m.setCreated_at(currentTime);
-            m.setUpdated_at(currentTime);
+            t.setCreated_at(currentTime);
+            t.setUpdated_at(currentTime);
 
-            em.persist(m);
+            em.persist(t);
             em.getTransaction().commit();
             em.close();
 
